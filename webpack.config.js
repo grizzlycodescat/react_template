@@ -16,9 +16,33 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.(js|jsx)$/,
-            use: "babel-loader"
-        }]
+                test: /\.(js|jsx)$/,
+                use: "babel-loader"
+            }, {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader', 'css-loader', 'sass-loader'
+                ]
+            },
+            {
+                test: /\.css$/,
+                loaders: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+                use: [
+                    'file-loader',
+                ],
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
+            {
+                test: /\.(csv|tsv)$/,
+                use: ['csv-loader']
+            }
+        ]
     },
     resolve: {
         extensions: ['.js', '.jsx']

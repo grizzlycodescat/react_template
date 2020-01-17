@@ -1,0 +1,54 @@
+//-- pixel to em convertor
+@function em($pixels, $context: $browser-base) {
+    @if (unitless($pixels)) {
+        $pixels: $pixels * 1px;
+    }
+  
+    @if (unitless($context)) {
+      $context: $context * 1px;
+    }
+  
+    @return $pixels / $context * 1em;
+}
+  
+//-- pixel to rem convertor
+@function rem($pixels, $context: $browser-base) {
+    @if (unitless($pixels)) {
+        $pixels: $pixels * 1px;
+    }
+  
+    @if (unitless($context)) {
+        $context: $context * 1px;
+    }
+  
+    @return $pixels / $context * 1rem;
+}
+
+//-- string replacer
+@function str-replace($string, $search, $replace: "") {
+    $index: str-index($string, $search);
+  
+    @if $index {
+      @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+  
+    @return $string;
+}
+
+/// Stroke font-character
+/// @param  {Integer} $stroke - Stroke width
+/// @param  {Color}   $color  - Stroke color
+/// @return {List}            - text-shadow list
+@function text-stroke($color,$stroke: 1) {
+    @if type-of($stroke) == 'number' and not unitless($stroke) {
+        $stroke: $stroke / ($stroke * 0 + 1);
+    }
+$shadow: ();
+$from: $stroke*-1;
+@for $i from $from through $stroke {
+ @for $j from $from through $stroke {
+    $shadow: append($shadow, $i*1px $j*1px 0 $color, comma);
+  }
+}
+@return $shadow;
+}
