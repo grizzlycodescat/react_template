@@ -5,7 +5,7 @@ import App from './components/app/App'
 
 // External Resources
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Stylesheet
 require('./styles/style.scss');
